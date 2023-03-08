@@ -26,54 +26,26 @@ def get_user_choice():
 
 # This function determines who won or if there was a tie and prints the corresponding statement.
 def get_winner(computer_choice, user_choice):
-    print(f'The computer played {computer_choice}')
-    computer_win = 0
-    user_win = 0
-    if (computer_choice == 'rock' or user_choice == 'rock') and (computer_choice == 'paper' or user_choice == 'paper'):
-        if user_choice == 'paper':
-            user_win += 1
-        else:
-            computer_win += 1
-    elif (computer_choice == 'rock' or user_choice == 'rock') and (computer_choice == 'scissors' or user_choice == 'scissors'):
+    if computer_choice == 'rock':
         if user_choice == 'rock':
-            user_win += 1
+            print('It is a tie!')
+        elif user_choice == 'paper':
+            print('You won!')
         else:
-            computer_win += 1
-    elif (computer_choice == 'paper' or user_choice == 'paper') and (computer_choice == 'scissors' or user_choice == 'scissors'):
-        if user_choice == 'scissors':
-            user_win += 1
+            print('You lost')
+    if computer_choice == 'paper':
+        if user_choice == 'rock':
+            print('You lost!')
+        elif user_choice == 'paper':
+            print('It is a tie!')
         else:
-            computer_win += 1
-    if user_win > computer_win:
-        print('You won!')
-    elif user_win == computer_win:
-        print('It is a tie!')
-    else:
-        print('You lost')
+            print('You won!')
+    if computer_choice == 'scissors':
+        if user_choice == 'rock':
+            print('You won!')
+        elif user_choice == 'paper':
+            print('You lost')
+        else:
+            print('It is a tie!')
 
 get_winner(get_computer_choice(), get_user_choice())
-
-    #if computer_choice == 'rock':
-        #if user_choice == 'rock':
-            #print('It is a tie!')
-        #elif user_choice == 'paper':
-            #print('You won!')
-        #else:
-            #print('You lost')
-    #if computer_choice == 'paper':
-        #if user_choice == 'rock':
-            #print('You lost!')
-        #elif user_choice == 'paper':
-            #print('It is a tie!')
-        #else:
-            #print('You won!')
-    #if computer_choice == 'scissors':
-        #if user_choice == 'rock':
-            #print('You won!')
-        #elif user_choice == 'paper':
-            #print('You lost')
-        #else:
-           # print('It is a tie!')
-
-
-
