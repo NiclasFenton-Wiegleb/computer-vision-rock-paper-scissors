@@ -21,13 +21,13 @@ This project aims to train a machine learning model that can determine if a huma
 
     1. Writing the function get_computer_choice that will randomly pick the computers play from a list of choices.
 
-    '''
-    def get_computer_choice():
-        choices_list = ['rock', 'paper', 'scissors']
-        choice_index = random.randint(0,2)
-        computer_choice = choices_list[choice_index]
-        return computer_choice
-    '''
+  
+        def get_computer_choice():
+            choices_list = ['rock', 'paper', 'scissors']
+            choice_index = random.randint(0,2)
+            computer_choice = choices_list[choice_index]
+            return computer_choice
+  
 
     2. Another function called get_user_choice is added that asks the user to input their play and only accepts valid options.
 
