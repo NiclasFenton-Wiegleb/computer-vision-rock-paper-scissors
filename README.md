@@ -21,17 +21,17 @@ This project aims to train a machine learning model that can determine if a huma
 
     1. Writing the function get_computer_choice that will randomly pick the computers play from a list of choices.
 
-  ```
+```
         def get_computer_choice():
             choices_list = ['rock', 'paper', 'scissors']
             choice_index = random.randint(0,2)
             computer_choice = choices_list[choice_index]
             return computer_choice
-  ```
+```
 
     2. Another function called get_user_choice is added that asks the user to input their play and only accepts valid options.
 
-    ```
+```
         def get_user_choice():
             choices_list = ['rock', 'paper', 'scissors']
             while True:
@@ -43,11 +43,11 @@ This project aims to train a machine learning model that can determine if a huma
                 else:
                     return user_choice
                     break
-    ```
+```
 
     3. Finally, the get_winner function takes in the play from both the computer and user and determines who won or if there is a tie. A corresponding statement is then printed to the console. This function goes through the possible scenarios and adds 1 to the score for whoever played the winning game. Everything else will indicate there was a tie.
 
-    ```
+```
         def get_winner(computer_choice, user_choice):
             computer_choice = computer_choice.lower()
             computer_win = 0
@@ -73,15 +73,15 @@ This project aims to train a machine learning model that can determine if a huma
                 print('It is a tie!')
             else:
                 print('You lost')
-    ```
+```
 
     4. To put the above together into a game, the play function generates the computer's play, asks the user for input and passes the two choices as parameters to the get_winner function.
 
-    ```
+```
         def play():
             computer_choice = get_computer_choice()
             user_choice = get_user_choice()
             print(f'The computer played {computer_choice}.')
             get_winner(computer_choice, user_choice)
-    ```
+```
 
