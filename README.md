@@ -17,7 +17,7 @@ This project aims to train a machine learning model that can determine if a huma
 
 ## Milestone 2
 
- - Creating python script that allows a user to play RPS with the computer by manually inputting their play:
+Creating python script that allows a user to play RPS with the computer by manually inputting their play:
 
     1. Writing the function get_computer_choice that will randomly pick the computers play from a list of choices.
 
