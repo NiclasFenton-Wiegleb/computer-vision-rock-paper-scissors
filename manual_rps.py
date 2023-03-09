@@ -7,7 +7,6 @@ def get_computer_choice():
     choices_list = ['rock', 'paper', 'scissors']
     choice_index = random.randint(0,2)
     computer_choice = choices_list[choice_index]
-    print(f'The computer played {computer_choice}.')
     return computer_choice
 
 
@@ -52,27 +51,15 @@ def get_winner(computer_choice, user_choice):
     else:
         print('You lost')
     
+#This function will put the previous functions together to play a game of rps
+def play():
+    computer_choice = get_computer_choice()
+    user_choice = get_user_choice()
+    print(f'The computer played {computer_choice}.')
+    get_winner(computer_choice, user_choice)
 
-get_winner(get_computer_choice(), get_user_choice())
+number_of_plays = 0
 
-'''if computer_choice == 'rock':
-        if user_choice == 'rock':
-            print('It is a tie!')
-        elif user_choice == 'paper':
-            print('You won!')
-        else:
-            print('You lost')
-    if computer_choice == 'paper':
-        if user_choice == 'rock':
-            print('You lost!')
-        elif user_choice == 'paper':
-            print('It is a tie!')
-        else:
-            print('You won!')
-    if computer_choice == 'scissors':
-        if user_choice == 'rock':
-            print('You won!')
-        elif user_choice == 'paper':
-            print('You lost')
-        else:
-            print('It is a tie!')'''
+while number_of_plays < 10:
+    play()
+    number_of_plays += 1
