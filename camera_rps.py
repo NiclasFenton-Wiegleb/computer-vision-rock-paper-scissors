@@ -2,9 +2,8 @@ from keras.models import load_model
 import cv2
 import numpy as np
 from PIL import Image
+import time
 
-# define a video capture object
-vid = cv2.VideoCapture(0)
 #Initiate trained model
 model = load_model('keras_model.h5', compile=False)
 
@@ -23,37 +22,52 @@ def get_prediction(video_input):
     print(predicted_play)
     return predicted_play
 
-while(True):
-      
-    # Capture the video frame
-    # by frame
-    ret, frame = vid.read()
+def get_prediction_from_vid():
+    # define a video capture object
+    vid = cv2.VideoCapture(0)
 
-    #Convert the captured frame into RGB
-    im = Image.fromarray(frame, 'RGB')
-    #Resizing into dimensions you used while training
-    im = im.resize((224,224))
-    img_array = np.array(im)
+    while(True):
+        
+        # Capture the video frame by frame
+        ret, frame = vid.read()
 
-    #Expand dimensions to match the 4D Tensor shape.
-    img_array = np.expand_dims(img_array, axis=0)
+        #Convert the captured frame into RGB
+        im = Image.fromarray(frame, 'RGB')
+        #Resizing into dimensions you used while training
+        im = im.resize((224,224))
+        img_array = np.array(im)
 
-    #Call function to get prediction from model
-    prediction = get_prediction(img_array)
-    # Display the resulting frame
-    cv2.imshow('frame', frame)
-    #transform frame to nparray readable by keras model
-    #frame_trans = np.insert(frame, 0, 'None')
-    #predictions_array = get_prediction(frame)
-    #print(predictions_array)
-      
-    # the 'q' button is set as the
-    # quitting button you may use any
-    # desired button of your choice
-    if cv2.waitKey(30) & 0xFF == ord('q'):
-       break
-  
-# After the loop release the cap object
-vid.release()
-# Destroy all the windows
-cv2.destroyAllWindows()
+        #Expand dimensions to match the 4D Tensor shape.
+        img_array = np.expand_dims(img_array, axis=0)
+
+        #Call function to get prediction from model
+        prediction = get_prediction(img_array)
+        # Display the resulting frame
+        cv2.imshow('frame', frame)
+        
+        # the 'q' button is set as the quitting button you may use any
+        # desired button of your choice
+        if cv2.waitKey(30) & 0xFF == ord('q'):
+            break
+
+    # After the loop release the cap object
+    vid.release()
+    # Destroy all the windows
+    cv2.destroyAllWindows()
+
+def timer():
+    #Initiatlises the start time
+    start_time = int(time.time())
+
+    while True:
+        #Current time variable is refreshed with each loop
+        current_time = int(time.time())
+        seconds = current_time - start_time
+        if seconds <= 3:
+            print(seconds)
+        else:
+            break
+
+timer()
+
+
