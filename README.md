@@ -9,7 +9,7 @@ This project aims to train a machine learning model that can determine if a huma
 
 ## Milestone 1
 
-- The machine learning model was trained to recognise four classes: Rock, Paper, Scissors and Nothing. The training set contained 1300 images, 300 for each possible play and 400 for the Nothing class
+- The machine learning model was trained to recognise four classes: Rock, Paper, Scissors and Nothing. The training set contained 2300 images, 500 for each possible play and 800 for the Nothing class, to minimise the chances of a false positive.
 
 - The files containing the model were downloaded from Teachable Machine and uploaded to this repository.
 

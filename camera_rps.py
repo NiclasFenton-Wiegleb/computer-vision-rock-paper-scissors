@@ -7,9 +7,6 @@ import time
 #Initiate trained model
 model = load_model('keras_model.h5', compile=False)
 
-# define a video capture object
-vid = cv2.VideoCapture(0)
-
 def timer(count_to):
     #Initiatlises the start time
     start_time = int(time.time())
@@ -56,8 +53,10 @@ def timer(count_to):
 # maybe get_prediction_from_vid could feed into get_prediction outside while loop? Or separate function to display video?
 def get_prediction_from_vid():
 
+    # define a video capture object
+    vid = cv2.VideoCapture(0)
+
     while True:
-        
         # Capture the video frame by frame
         ret, frame = vid.read()
 
@@ -74,14 +73,13 @@ def get_prediction_from_vid():
         img_array = np.expand_dims(img_array, axis=0)
 
         #Wait for 3 seconds
-        timer(3)
+#        timer(3)
         #Call function to get prediction from model
         prediction = get_prediction(img_array)
         
         #check if prediction is anything other than 'Nothing' class
         if prediction != 'Nothing':
            print(prediction)
-           break
 
         # the 'q' button is set as the quitting button you may use any
         # desired button of your choice
