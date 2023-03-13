@@ -72,7 +72,7 @@ class camera_rps:
 
             #get user choice
             user_choice_list = []
-            for val in range(10):
+            for val in range(8):
                 # Capture the video frame by frame
                 ret, frame = vid.read()
 
