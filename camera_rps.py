@@ -11,6 +11,10 @@ np.set_printoptions(suppress=True)
 #Initiate trained model
 model = load_model('keras_model.h5', compile=False)
 
+#Assigning variables to track computer and user wins.
+computer_wins = 0
+user_wins = 0
+
 # This function generates the computer's choice by selecting a random index between 0 and 2 and returning the play with the corresponding index
 def get_computer_choice():
     choices_list = ['rock', 'paper', 'scissors']
@@ -77,12 +81,9 @@ def play_camera_rps():
     # define a video capture object
     vid = cv2.VideoCapture(0)
 
-    computer_wins = 0
-    user_wins = 0
-
     while True:
             #Wait for 3 seconds
-            print("Countdown:\n")
+            print("Countdown:")
             print(1)
             timer(1)
             print(2)
