@@ -51,22 +51,6 @@ def get_prediction(video_input):
     prediction = prediction.lower()
     return prediction
 
-def get_winner(user_choice, user_wins, computer_choice, computer_wins):
-    if (computer_choice == 'rock' or user_choice == 'rock') and (computer_choice == 'paper' or user_choice == 'paper'):
-        if user_choice == 'paper':
-            user_wins += 1
-        else:
-            computer_wins += 1
-    elif (computer_choice == 'rock' or user_choice == 'rock') and (computer_choice == 'scissors' or user_choice == 'scissors'):
-        if user_choice == 'rock':
-            user_wins += 1
-        else:
-            computer_wins += 1
-    elif (computer_choice == 'paper' or user_choice == 'paper') and (computer_choice == 'scissors' or user_choice == 'scissors'):
-        if user_choice == 'scissors':
-            user_wins += 1
-        else:
-            computer_wins += 1
 
 # Play the game by accessing camera
 def play_camera_rps():
@@ -115,22 +99,35 @@ def play_camera_rps():
             
         #check if prediction is anything other than 'nothing' class
         if user_choice != 'nothing':
-            get_winner(user_choice, user_wins, computer_choice, computer_wins)
+            if (computer_choice == 'rock' or user_choice == 'rock') and (computer_choice == 'paper' or user_choice == 'paper'):
+                if user_choice == 'paper':
+                    user_wins += 1
+                else:
+                    computer_wins += 1
+            elif (computer_choice == 'rock' or user_choice == 'rock') and (computer_choice == 'scissors' or user_choice == 'scissors'):
+                if user_choice == 'rock':
+                    user_wins += 1
+                else:
+                    computer_wins += 1
+            elif (computer_choice == 'paper' or user_choice == 'paper') and (computer_choice == 'scissors' or user_choice == 'scissors'):
+                if user_choice == 'scissors':
+                    user_wins += 1
+                else:
+                    computer_wins += 1
         else:
             continue
         print(f"Computer wins: {computer_wins}")
         print(f"Your wins: {user_wins}")
 
         #break loop once a player has three victories.
-        if (computer_wins or user_wins) == 3:
+        if computer_wins == 3 or user_wins == 3:
             if user_wins > computer_wins:
                 print('You won!')
                 break
             else:
                 print('You lost')
                 break
-
-
+        #When 'q' key hit break loop
         if cv2.waitKey(30) & 0xFF == ord('q'):
             break
     # After the loop release the cap object
