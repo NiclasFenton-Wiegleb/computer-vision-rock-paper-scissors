@@ -43,18 +43,21 @@ class camera_rps:
     def get_prediction(self, video_input):
 
         # Getting prediction array from model
-        predictions_arr = model.predict(video_input)
+        prediction_arr = model.predict(video_input)
         #Flattening array and converting to list
-        predictions_flat = predictions_arr.flatten()
-        predictions_lst = predictions_flat.tolist()
+    #    predictions_flat = predictions_arr.flatten()
+    #    predictions_lst = predictions_flat.tolist()
 
         # Getting index of most likely class and assigning corresponding value as
         # predicted play.
-        prediction_index = predictions_lst.index(predictions_flat.max())
-        plays = ['rock', 'paper', 'scissors', 'nothing']
-        prediction = plays[prediction_index]
+    #    prediction_index = predictions_lst.index(predictions_flat.max())
+    #    plays = ['rock', 'paper', 'scissors', 'nothing']
+    #    prediction = plays[prediction_index]
+        index = np.argmax(prediction)
+        prediction = class_names[index]
+        confidence_score = prediction_arr[0][index]
         prediction = prediction.lower()
-        return prediction
+        return prediction, confidence_score
 
 
     # Play the game by accessing camera
@@ -92,7 +95,8 @@ class camera_rps:
                 cv2.imshow('frame', frame)
 
                 #Call function to get prediction from model
-                user_choice = self.get_prediction(img_array)
+                user_choice, confidenc_score = self.get_prediction(img_array)
+                print(confidenc_score)
                 user_choice_list.append(user_choice)
 
             #Select the most common element in user_choice_list
