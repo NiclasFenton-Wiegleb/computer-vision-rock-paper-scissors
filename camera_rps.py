@@ -11,6 +11,9 @@ np.set_printoptions(suppress=True)
 #Initiate trained model
 model = load_model('keras_model.h5', compile=False)
 
+# Load the labels
+class_names = open("labels.txt", "r").readlines()
+
 class camera_rps:
 
     def __init__(self):
@@ -40,7 +43,7 @@ class camera_rps:
     def get_prediction(self, video_input):
 
         # Getting prediction array from model
-        predictions_arr = model.predict(video_input, verbose =1)
+        predictions_arr = model.predict(video_input)
         #Flattening array and converting to list
         predictions_flat = predictions_arr.flatten()
         predictions_lst = predictions_flat.tolist()
