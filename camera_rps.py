@@ -1,3 +1,29 @@
+'''
+This code creates a class to play Rock, Paper Scissors with the computer via 
+the webcam.
+
+The camera_rps class containse the functions get_computer_choice(), which
+generates a random choice or Rock, Paper Scissors as the computer's play. There is
+also a timer(seconds) function, which delays the code by as many seconds as
+are passed into the function without stopping the code.
+
+The get_prediction(image_array) takes a frame captured by the camera and passes it
+to the trained keras model to predict what the user is most likely playing.
+
+Finally, the play function runs through a loop where it counts to 3, captures a frame,
+predicts the play the user is showing the camera, generates the computer choice and
+keeps score of who wins. The first player to win 3 rounds wins the game.
+
+To improve the accuracy of the image recognition, 20 frames are taken and run through
+the model. The predicted classes are added to a list and the most common element
+is chosen as the user's choice.
+
+This improved accuracy from _____ when taking only a single frame to ___ when taking
+20 and picking the most common.
+
+
+'''
+
 from keras.models import load_model
 import cv2
 import numpy as np
@@ -10,9 +36,6 @@ np.set_printoptions(suppress=True)
 
 #Initiate trained model
 model = load_model('keras_model.h5', compile=False)
-
-# Load the labels
-class_names = open("labels.txt", "r").readlines()
 
 class camera_rps:
 
@@ -43,21 +66,18 @@ class camera_rps:
     def get_prediction(self, video_input):
 
         # Getting prediction array from model
-        prediction_arr = model.predict(video_input)
+        predictions_arr = model.predict(video_input)
         #Flattening array and converting to list
-    #    predictions_flat = predictions_arr.flatten()
-    #    predictions_lst = predictions_flat.tolist()
+        predictions_flat = predictions_arr.flatten()
+        predictions_lst = predictions_flat.tolist()
 
         # Getting index of most likely class and assigning corresponding value as
         # predicted play.
-    #    prediction_index = predictions_lst.index(predictions_flat.max())
-    #    plays = ['rock', 'paper', 'scissors', 'nothing']
-    #    prediction = plays[prediction_index]
-        index = np.argmax(prediction)
-        prediction = class_names[index]
-        confidence_score = prediction_arr[0][index]
+        prediction_index = predictions_lst.index(predictions_flat.max())
+        plays = ['rock', 'paper', 'scissors', 'nothing']
+        prediction = plays[prediction_index]
         prediction = prediction.lower()
-        return prediction, confidence_score
+        return prediction
 
 
     # Play the game by accessing camera
@@ -78,7 +98,7 @@ class camera_rps:
 
             #get user choice
             user_choice_list = []
-            for val in range(8):
+            for val in range(20):
                 # Capture the video frame by frame
                 ret, frame = vid.read()
 
@@ -95,8 +115,7 @@ class camera_rps:
                 cv2.imshow('frame', frame)
 
                 #Call function to get prediction from model
-                user_choice, confidenc_score = self.get_prediction(img_array)
-                print(confidenc_score)
+                user_choice = self.get_prediction(img_array)
                 user_choice_list.append(user_choice)
 
             #Select the most common element in user_choice_list
